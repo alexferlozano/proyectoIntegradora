@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "first_name":"Alex Fernando",
+      "last_name":"Lozano",
+      "second_last_name":"Mendez",
+      "username": "alexferloz",
+      "email": "alex@gmail.com",
+      "password": "1234",
+      "rol_id": 1
+    }
+  ],
+  "roles": [
+    {
+      "name": "Administrador"
+    },
+    {
+      "name": "Usuario"
+    }
+  ]
+}
