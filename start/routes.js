@@ -17,3 +17,12 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+Route.group(() => {
+  Route.post('login', 'AuthController.logIn').validator('Login')
+  Route.post('signup', 'AuthController.signUp').validator('User/StoreUser')
+  /* Route.post('refresh', 'AuthController.refreshToken').middleware('auth')
+  Route.delete('logout', 'AuthController.logOut').middleware('auth')
+  Route.put('changepassword', 'AuthController.changePassword').middleware(['auth']) */
+})
+  .prefix('v1/auth')
