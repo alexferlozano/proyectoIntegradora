@@ -4,6 +4,17 @@
 const Model = use('Model')
 
 class Camera extends Model {
+  static get store () {
+    return [
+      'code',
+      'name'
+    ]
+  }
+
+  static get update () {
+    return ['name']
+  }
+
   user () {
     return this.belongsToMany('App/Models/User')
   }
