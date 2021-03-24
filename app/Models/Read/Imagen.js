@@ -4,6 +4,13 @@
 const Model = use('Model')
 
 class Imagen extends Model {
+  user () {
+    return this.belongsToMany('App/Models/User')
+  }
+
+  image () {
+    return this.belongsToMany('App/Models/Read/Camera')
+  }
 }
 
 module.exports = Imagen

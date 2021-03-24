@@ -26,3 +26,6 @@ Route.group(() => {
   Route.put('changepassword', 'AuthController.changePassword').middleware(['auth']) */
 })
   .prefix('v1/auth')
+
+require('./routes/image')
+require('./routes/read')
