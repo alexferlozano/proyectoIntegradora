@@ -4,6 +4,14 @@
 const Model = use('Model')
 
 class Imagen extends Model {
+  static get store () {
+    return [
+      'route',
+      'date_photo',
+      'user_id'
+    ]
+  }
+
   user () {
     return this.belongsToMany('App/Models/User')
   }

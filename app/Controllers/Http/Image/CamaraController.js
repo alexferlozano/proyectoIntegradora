@@ -61,7 +61,7 @@ class CamaraController {
     return response.ok({
       data: cameras
     })
-}
+  }
 }
 
 module.exports = CamaraController

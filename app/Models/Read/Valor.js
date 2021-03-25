@@ -4,8 +4,16 @@
 const Model = use('Model')
 
 class Valor extends Model {
+  static get store () {
+    return [
+      'sensor_id',
+      'int_value',
+      'double_value'
+    ]
+  }
+
   sensors () {
-    return this.belongsToMany('App/Models/Read/Sensor')
+    return this.belongsTo('App/Models/Read/Sensor')
   }
 
   user () {

@@ -11,3 +11,14 @@ Route.group(() => {
   .namespace('Read')
   .prefix('v1/api/sensores/')
   .middleware(['auth:jwt'])
+
+Route.group(() => {
+  Route.get('show', 'ValorController.index')
+  Route.get(':id2', 'ValorController.show')
+  Route.post('create', 'ValorController.store')
+  Route.put(':id2/edit', 'ValorController.update')
+  Route.delete(':id2/delete', 'ValorController.destroy')
+})
+  .namespace('Read')
+  .prefix('v1/api/sensor/:id/')
+  .middleware(['auth:jwt'])
