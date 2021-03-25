@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Imagen extends Model {
+  static get table () {
+    return 'images'
+  }
+
   static get store () {
     return [
       'route',
@@ -16,8 +20,8 @@ class Imagen extends Model {
     return this.belongsToMany('App/Models/User')
   }
 
-  image () {
-    return this.belongsToMany('App/Models/Read/Camera')
+  camera () {
+    return this.belongsTo('App/Models/Read/Camera')
   }
 }
 

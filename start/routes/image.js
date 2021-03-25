@@ -12,3 +12,12 @@ Route.group(() => {
   .namespace('Image')
   .prefix('v1/api/camera/')
   .middleware(['auth:jwt'])
+
+Route.group(() => {
+  Route.get('show', 'ImageController.index')
+  Route.get(':id2', 'ImageController.show')
+  Route.post('create', 'ImageController.store')
+})
+  .namespace('Image')
+  .prefix('v1/api/cameras/:id/')
+  .middleware(['auth:jwt'])
