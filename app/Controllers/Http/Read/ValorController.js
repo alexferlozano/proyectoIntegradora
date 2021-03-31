@@ -37,27 +37,6 @@ class ValorController {
       })
     }
   }
-
-  async update ({ params, request, response }) {
-    const value = await Valor.findOrFail(params.id)
-    const valueData = request.only(Valor.update)
-    await value.merge(valueData)
-    await value.save()
-    return response.ok({
-      status: 'success',
-      message: 'value updated succesfully',
-      data: value
-    })
-  }
-
-  async destroy ({ params, request, response }) {
-    const value = await Valor.findOrFail(params.id)
-    value.delete()
-    return response.ok({
-      status: 'success',
-      message: 'value deleted'
-    })
-  }
 }
 
 module.exports = ValorController

@@ -27,9 +27,6 @@ class User extends Model {
 
   static get store () {
     return [
-      'first_name',
-      'last_name',
-      'second_last_name',
       'username',
       'email',
       'password'
@@ -38,9 +35,6 @@ class User extends Model {
 
   static get update () {
     return [
-      'first_name',
-      'last_name',
-      'second_last_name',
       'username',
       'email'
     ]

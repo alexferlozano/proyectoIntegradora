@@ -22,9 +22,6 @@ Factory.blueprint('App/Models/Rol', (faker, i, data) => {
 
 Factory.blueprint('App/Models/User', (faker, i, data) => {
   return {
-    first_name: data.first_name,
-    last_name: data.last_name,
-    second_last_name: data.second_last_name,
     username: data.username,
     email: data.email,
     password: data.password,
