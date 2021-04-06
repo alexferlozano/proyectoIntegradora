@@ -58,9 +58,7 @@ class CamaraController {
   async mycamera ({ params, auth, response }) {
     const user = await auth.getUser()
     const cameras = await user.cameras().fetch()
-    return response.ok({
-      data: cameras
-    })
+    return response.ok(cameras)
   }
 }
 
