@@ -11,8 +11,7 @@ class Imagen extends Model {
   static get store () {
     return [
       'route',
-      'date_photo',
-      'user_id'
+      'date_photo'
     ]
   }
 

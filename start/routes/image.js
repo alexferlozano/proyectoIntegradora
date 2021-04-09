@@ -2,12 +2,12 @@
 const Route = use('Route')
 
 Route.group(() => {
-  Route.get('show', 'CamaraController.index')
+  Route.get('show', 'CamaraController.index') /* admin */
   Route.get('mycamera', 'CamaraController.mycamera')
-  Route.get(':id', 'CamaraController.show')
+  Route.get(':id', 'CamaraController.show') /* middleware required */
   Route.post('create', 'CamaraController.store')
-  Route.put(':id/edit', 'CamaraController.update')
-  Route.delete(':id/delete', 'CamaraController.destroy')
+  Route.put(':id/edit', 'CamaraController.update') /* middleware required */
+  Route.delete(':id/delete', 'CamaraController.destroy') /* middleware required¡ */
 })
   .namespace('Image')
   .prefix('v1/api/camera/')
@@ -19,5 +19,10 @@ Route.group(() => {
   Route.post('create', 'ImageController.store')
 })
   .namespace('Image')
-  .prefix('v1/api/cameras/:id/')
+  .prefix('v1/api/camera/:id/images')
   .middleware(['auth:jwt'])
+
+Route.get('myphotos', 'ImageController.myphotos')
+  .prefix('v1/api/photos')
+  .namespace('Image')
+  .middleware('auth:jwt')
