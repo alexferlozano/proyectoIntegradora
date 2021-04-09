@@ -29,3 +29,4 @@ Route.group(() => {
 
 require('./routes/image')
 require('./routes/read')
+require('./routes/user')
