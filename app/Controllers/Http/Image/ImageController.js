@@ -2,12 +2,18 @@
 const Camera = use('App/Models/Read/Camera')
 const Image = use('App/Models/Read/Imagen')
 const Database = use('Database')
-const dayjs = use('dayjs')
+// const dayjs = use('dayjs')
 
 class ImageController {
   async index ({ request, response, auth }) {
     const images = await Image.query().with('camera').fetch()
     return response.ok(images)
+  }
+
+  async myphotos ({ response, auth }) {
+    const user = await auth.getUser()
+    const data = await user.images().fetch()
+    return response.ok({ data })
   }
 
   async show ({ params, request, response, view }) {
@@ -23,7 +29,7 @@ class ImageController {
       const image = await user.images().create({
         camera_id: camera.id,
         route: request.input('route'),
-        date_photo: dayjs().format()
+        date_photo: new Date()
       }, trx)
       await trx.commit()
       return response.created({

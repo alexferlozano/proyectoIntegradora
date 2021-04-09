@@ -23,7 +23,7 @@ class CamaraController {
       return response.created({
         status: 'Success',
         message: 'camera created',
-        data: camera
+        camera
       })
     } catch (error) {
       await trx.rollback()
@@ -58,9 +58,7 @@ class CamaraController {
   async mycamera ({ params, auth, response }) {
     const user = await auth.getUser()
     const cameras = await user.cameras().fetch()
-    return response.ok({
-      data: cameras
-    })
+    return response.ok({ cameras })
   }
 }
 
