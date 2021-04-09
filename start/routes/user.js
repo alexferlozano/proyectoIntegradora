@@ -2,6 +2,7 @@
 const Route = use('Route')
 
 Route.group(() => {
+  Route.get('', 'UserController.getProfile')
   Route.put('edit', 'UserController.editProfile')
 })
   .prefix('v1/api/profile/')

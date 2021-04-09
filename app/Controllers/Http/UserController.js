@@ -13,5 +13,10 @@ class UserController {
       message: 'User updated succesfully'
     })
   }
+
+  async getProfile ({ request, auth, response }) {
+    const user = await auth.getUser()
+    return response.ok(user)
+  }
 }
 module.exports = UserController
