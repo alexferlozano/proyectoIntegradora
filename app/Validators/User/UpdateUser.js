@@ -11,7 +11,8 @@ class UpdateUser {
 
   get rules () {
     return {
-      email: 'required|email|unique:users|max:254'
+      email: 'required_without_any:username|email|unique:users|max:254',
+      username: 'required_without_any:email|unique:users|max:80'
     }
   }
 
