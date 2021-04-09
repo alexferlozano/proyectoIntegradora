@@ -2,7 +2,8 @@
 const Route = use('Route')
 
 Route.group(() => {
-  Route.put('edit', 'UserController.editProfile')
+  Route.get('', 'UserController.getProfile')
+  Route.put('edit', 'UserController.editProfile').validator('User/UpdateUser')
 })
   .prefix('v1/api/profile/')
   .middleware(['auth:jwt'])

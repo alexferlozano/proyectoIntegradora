@@ -1,6 +1,6 @@
 'use strict'
 const { formatters } = use('Validator')
-class StoreUser {
+class UpdateUser {
   get formatter () {
     return formatters.JsonApi
   }
@@ -11,9 +11,8 @@ class StoreUser {
 
   get rules () {
     return {
-      email: 'required|email|unique:users|max:254',
-      password: 'required|max:60',
-      username: 'required|unique|max:80'
+      email: 'required_without_any:username|email|unique:users|max:254',
+      username: 'required_without_any:email|unique:users|max:80'
     }
   }
 
@@ -22,4 +21,4 @@ class StoreUser {
   }
 }
 
-module.exports = StoreUser
+module.exports = UpdateUser
