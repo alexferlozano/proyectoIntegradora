@@ -25,7 +25,7 @@ module.exports = {
     uid: 'email',
     password: 'password'
   },
-  
+
   basic: {
     serializer: 'LucidMongo',
     model: 'App/Models/User',

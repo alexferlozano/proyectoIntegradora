@@ -13,23 +13,13 @@ class SensorController {
   }
 
   async store ({ request, response }) {
-    const trx = await Database.beginTransaction()
-    try {
-      const sensorData = request.only(Sensor.store)
-      const sensor = await Sensor.create(sensorData, trx)
-      await trx.commit()
-      return response.created({
-        status: 'Success',
-        message: 'tournament created',
-        data: sensor
-      })
-    } catch (error) {
-      await trx.rollback()
-      return response.internalServerError({
-        message: 'something was wrong!',
-        error: error
-      })
-    }
+    const sensorData = request.only(Sensor.store)
+    const sensor = await Sensor.create(sensorData)
+    return response.created({
+      status: 'Success',
+      message: 'tournament created',
+      data: sensor
+    })
   }
 
   async update ({ params, request, response }) {

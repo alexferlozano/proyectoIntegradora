@@ -1,6 +1,4 @@
 const User = use('App/Models/User')
-const Database = use('Database')
-const Logger = use('Logger')
 
 class UserController {
   async editProfile ({ request, auth, response }) {

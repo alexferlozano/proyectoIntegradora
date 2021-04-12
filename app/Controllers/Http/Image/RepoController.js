@@ -11,17 +11,16 @@ const Ws = use('Ws')
 const User = use('App/Models/User')
 
 class RepoController {
-
   async storeCamera ({ request, response }) {
-    /*const camera = await Camera.findBy('code', request.input('code'))
+    /* const camera = await Camera.findBy('code', request.input('code'))
     if(camera){
       return response.internalServerError({
         message: 'Camara ya creada!',
         error: error
       })
-    }*/
+    } */
     const camera = await Camera.findBy('code', request.input('code'))
-    if(camera){
+    if (camera) {
       return response.unprocessableEntity({
         message: 'Camera already registered'
       })
@@ -50,7 +49,7 @@ class RepoController {
     try {
       const filePath = `uploads/${params.fileName}`;
       const exists = Drive.get(filePath)
-      if(exists){
+      if (exists) {
         return response.download(Helpers.tmpPath(filePath))
       }
     } catch (error) {
@@ -63,7 +62,7 @@ class RepoController {
 
   async storeImage ({ request, response }) {
     const camera = await Camera.findBy('code', request.input('code'))
-    if(!camera){
+    if (!camera) {
       return response.notFound({
         message: 'Camera not found'
       })
@@ -99,7 +98,7 @@ class RepoController {
       const user = await User.find(camera.user_id)
       const topic = Ws.getChannel('images:*').topic('images:'+user.username)
       console.log(topic)
-      if(topic && user){
+      if (topic && user) {
         console.log("Enviado")
         topic.broadcast('message', obj_type + ", se ha guardado una nueva imagen")
       }
@@ -118,7 +117,7 @@ class RepoController {
 
   async storeValue ({ request, response }) {
     const camera = await Camera.findBy('code', request.input('code'))
-    if(!camera){
+    if (!camera) {
       return response.notFound({
         message: 'Camara not found'
       })
@@ -133,7 +132,7 @@ class RepoController {
       const user = await User.find(camera.user_id)
       const topic = Ws.getChannel('values:*').topic('values:'+user.username)
       console.log(topic)
-      if(topic && user){
+      if (topic && user) {
         console.log("Enviado")
         topic.broadcast('message', "Nuevos valores guardados")
       }
@@ -152,7 +151,7 @@ class RepoController {
 
   async videoFeed ({ request, response }) {
     const camera = await Camera.findBy('code', request.input('code'))
-    if(!camera){
+    if (!camera) {
       return response.notFound({
         message: 'Camara not found'
       })
@@ -161,7 +160,7 @@ class RepoController {
       const user = await User.find(camera.user_id)
       const topic = Ws.getChannel('video:*').topic('video:'+user.username)
       console.log(topic)
-      if(topic && user){
+      if (topic && user) {
         console.log("Enviado")
         topic.broadcast('message', "Cámara conectada, el vídeo en vivo iniciado ha iniciado")
       }

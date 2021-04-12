@@ -19,7 +19,7 @@ class CamaraController {
   async store ({ request, response, auth }) {
     const cam = await Camera.findByOrFail('code', request.input('code'))
     const camUser = await User.find(cam.user_id)
-    if(!camUser){
+    if (!camUser) {
       const user = await auth.getUser()
       try {
         cam.name = request.input('name')
@@ -36,12 +36,11 @@ class CamaraController {
           error: error
         })
       }
-    }else{
+    } else {
       return response.unprocessableEntity({
         message: 'Cámara ya asociada'
       })
     }
-
   }
 
   async update ({ params, request, response }) {
