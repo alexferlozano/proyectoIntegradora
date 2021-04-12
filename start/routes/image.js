@@ -4,7 +4,7 @@ const Route = use('Route')
 Route.group(() => {
   Route.get('show', 'CamaraController.index') /* admin */
   Route.get('mycamera', 'CamaraController.mycamera')
-  Route.get(':id', 'CamaraController.show') /* middleware required */
+  Route.get(':code', 'CamaraController.show') /* middleware required */
   Route.post('create', 'CamaraController.store')
   Route.put(':id/edit', 'CamaraController.update') /* middleware required */
   Route.delete(':id/delete', 'CamaraController.destroy') /* middleware required¡ */
@@ -26,3 +26,23 @@ Route.get('myphotos', 'ImageController.myphotos')
   .prefix('v1/api/photos')
   .namespace('Image')
   .middleware('auth:jwt')
+
+Route.post('cam', 'RepoController.storeCamera')
+  .prefix('v1/api/repo')
+  .namespace('Image')
+
+Route.post('img', 'RepoController.storeImage')
+  .prefix('v1/api/repo')
+  .namespace('Image')
+
+Route.post('values', 'RepoController.storeValue')
+  .prefix('v1/api/repo')
+  .namespace('Image')
+
+Route.get('img/:fileName', 'RepoController.showImage')
+  .prefix('v1/api/repo')
+  .namespace('Image')
+
+Route.post('video', 'RepoController.videoFeed')
+  .prefix('v1/api/repo')
+  .namespace('Image')

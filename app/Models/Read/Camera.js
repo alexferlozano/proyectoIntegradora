@@ -19,8 +19,12 @@ class Camera extends Model {
     return this.belongsToMany('App/Models/User')
   }
 
-  image () {
+  images () {
     return this.hasMany('App/Models/Read/Imagen')
+  }
+
+  values () {
+    return this.hasMany('App/Models/Read/Valor')
   }
 }
 

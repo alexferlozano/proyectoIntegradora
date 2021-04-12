@@ -12,8 +12,8 @@ class Valor extends Model {
     ]
   }
 
-  sensors () {
-    return this.belongsTo('App/Models/Read/Sensor')
+  camera () {
+    return this.belongsTo('App/Models/Read/Camera')
   }
 
   user () {

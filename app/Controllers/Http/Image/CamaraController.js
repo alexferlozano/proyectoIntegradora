@@ -1,4 +1,7 @@
 'use strict'
+
+const User = require("../../../Models/User")
+
 const Camera = use('App/Models/Read/Camera')
 const Database = use('Database')
 
@@ -9,29 +12,36 @@ class CamaraController {
   }
 
   async show ({ params, request, response, view }) {
-    const camera = await Camera.findOrFail(params.id)
+    const camera = await Camera.query().with('images').with('values').where('code', params.code).first()
     return response.ok(camera)
   }
 
   async store ({ request, response, auth }) {
-    const trx = await Database.beginTransaction()
-    const user = await auth.getUser()
-    try {
-      const cameraData = request.only(Camera.store)
-      const camera = await user.cameras().create(cameraData, trx)
-      await trx.commit()
-      return response.created({
-        status: 'Success',
-        message: 'camera created',
-        camera
-      })
-    } catch (error) {
-      await trx.rollback()
-      return response.internalServerError({
-        message: 'something was wrong!',
-        error: error
+    const cam = await Camera.findByOrFail('code', request.input('code'))
+    const camUser = await User.find(cam.user_id)
+    if(!camUser){
+      const user = await auth.getUser()
+      try {
+        cam.name = request.input('name')
+        const camera = await user.cameras().save(cam)
+        console.log(camera)
+        return response.created({
+          status: 'Success',
+          message: 'camera created',
+          data: camera
+        })
+      } catch (error) {
+        return response.internalServerError({
+          message: 'something was wrong!',
+          error: error
+        })
+      }
+    }else{
+      return response.unprocessableEntity({
+        message: 'Cámara ya asociada'
       })
     }
+
   }
 
   async update ({ params, request, response }) {
