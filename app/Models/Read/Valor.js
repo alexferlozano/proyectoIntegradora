@@ -6,9 +6,8 @@ const Model = use('Model')
 class Valor extends Model {
   static get store () {
     return [
-      'sensor_id',
-      'int_value',
-      'double_value'
+      'temperature',
+      'humidity'
     ]
   }
 

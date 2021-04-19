@@ -61,16 +61,8 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-  sensors () {
-    return this.hasMany('App/Models/Read/Valor')
-  }
-
   cameras () {
     return this.hasMany('App/Models/Read/Camera')
-  }
-
-  images () {
-    return this.hasMany('App/Models/Read/Imagen')
   }
 
   rol () {
