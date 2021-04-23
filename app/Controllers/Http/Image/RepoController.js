@@ -1,6 +1,6 @@
 'use strict'
 
-const { findByOrFail } = require("@adonisjs/lucid/src/Lucid/Model")
+const { findByOrFail } = require('@adonisjs/lucid/src/Lucid/Model')
 
 const Camera = use('App/Models/Read/Camera')
 const Image = use('App/Models/Read/Imagen')
@@ -46,7 +46,7 @@ class RepoController {
       })
     }
     try {
-      camera.merge({ip: request.input('ip')})
+      camera.merge({ ip: request.input('ip') })
       await camera.save()
       return response.ok({
         status: 'Success',
@@ -63,7 +63,7 @@ class RepoController {
 
   async showImage ({ params, response }) {
     try {
-      const filePath = `uploads/${params.fileName}`;
+      const filePath = `uploads/${params.fileName}`
       const exists = Drive.get(filePath)
       if (exists) {
         return response.download(Helpers.tmpPath(filePath))
@@ -92,23 +92,23 @@ class RepoController {
       if (!imageFile.moved()) {
         return imageFile.error()
       }
-      var obj_type
+      let obj_type
       switch (request.input('obj_type')) {
         case 1, '1':
           obj_type = 'Persona detectada'
-          break;
+          break
         case 2, '2':
           obj_type = 'Presencia detectada'
-          break;
+          break
         default:
           obj_type = 'Desconocido'
-          break;
+          break
       }
       const image = await camera.images().create({
         route: request.input('route'),
         obj_type: obj_type,
         distance: request.input('distance'),
-        date_photo: request.input('date_photo')? request.input('date_photo') : new Date(),
+        date_photo: request.input('date_photo') ? request.input('date_photo') : new Date()
       })
       await image.save()
       const user = await User.find(camera.user_id)
@@ -142,7 +142,7 @@ class RepoController {
       const value = await camera.values().create({
         temperature: request.input('temperature'),
         humidity: request.input('humidity'),
-        date_value: request.input('date_value')? request.input('date_value') : new Date(),
+        date_value: request.input('date_value') ? request.input('date_value') : new Date()
       })
       await value.save()
       const user = await User.find(camera.user_id)

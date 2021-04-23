@@ -2,6 +2,7 @@
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
+const Env = use('Env')
 
 class UserSchema extends Schema {
   up () {

@@ -20,7 +20,8 @@ const providers = [
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/auth/providers/AuthProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
-  // 'lucid-mongo/providers/LucidMongoProvider',
+  'lucid-mongo/providers/LucidMongoProvider',
+  // 'adonis-mongo-rules-validator/providers/MongoRulesProvider',
   '@adonisjs/drive/providers/DriveProvider',
   '@adonisjs/websocket/providers/WsProvider'
 ]
@@ -36,7 +37,7 @@ const providers = [
 */
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
-  // 'lucid-mongo/providers/MigrationsProvider'
+  'lucid-mongo/providers/MigrationsProvider'
 ]
 
 /*
