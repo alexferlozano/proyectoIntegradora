@@ -94,14 +94,14 @@ class RepoController {
       }
       var obj_type
       switch (request.input('obj_type')) {
-        case 1, "1":
-          obj_type = "Persona detectada"
+        case 1, '1':
+          obj_type = 'Persona detectada'
           break;
-        case 2, "2":
-          obj_type = "Presencia detectada"
+        case 2, '2':
+          obj_type = 'Presencia detectada'
           break;
         default:
-          obj_type = "Desconocido"
+          obj_type = 'Desconocido'
           break;
       }
       const image = await camera.images().create({
@@ -112,11 +112,11 @@ class RepoController {
       })
       await image.save()
       const user = await User.find(camera.user_id)
-      const topic = Ws.getChannel('images:*').topic('images:'+user.username)
+      const topic = Ws.getChannel('images:*').topic('images:' + user.username)
       console.log(topic)
       if (topic && user) {
-        console.log("Enviado")
-        topic.broadcast('message', obj_type + ", se ha guardado una nueva imagen")
+        console.log('Enviado')
+        topic.broadcast('message', obj_type + ', se ha guardado una nueva imagen')
       }
       return response.created({
         status: 'Success',
@@ -146,11 +146,11 @@ class RepoController {
       })
       await value.save()
       const user = await User.find(camera.user_id)
-      const topic = Ws.getChannel('values:*').topic('values:'+user.username)
+      const topic = Ws.getChannel('values:*').topic('values:' + user.username)
       console.log(topic)
       if (topic && user) {
-        console.log("Enviado")
-        topic.broadcast('message', "Nuevos valores guardados")
+        console.log('Enviado')
+        topic.broadcast('message', 'Nuevos valores guardados')
       }
       return response.created({
         status: 'Success',
@@ -174,16 +174,11 @@ class RepoController {
     }
     try {
       const user = await User.find(camera.user_id)
-      if(!user) {
-        return response.notFound({
-          message: 'User not found'
-        })
-      }
-      const topic = Ws.getChannel('video:*').topic('video:'+user.username)
+      const topic = Ws.getChannel('video:*').topic('video:' + user.username)
       console.log(topic)
       if (topic && user) {
-        console.log("Enviado")
-        topic.broadcast('message', "Cámara conectada, el vídeo en vivo iniciado ha iniciado")
+        console.log('Enviado')
+        topic.broadcast('message', 'Cámara conectada, el vídeo en vivo iniciado ha iniciado')
       }
       return response.ok({
         status: 'Success',
