@@ -12,8 +12,8 @@ class UpdateUser {
   get rules () {
     const userId = this.ctx.params.id
     return {
-      email: `required|email|max:254|unique:users,email,id,${userId}`,
-      username: `required|email|max:254|unique:users,username,id,${userId}`
+      email: `requiredWithoutAll:username|email|max:254|unique:users,email,id,${userId}`,
+      username: `requiredWithoutAll:email|max:254|unique:users,username,id,${userId}`
     }
   }
 

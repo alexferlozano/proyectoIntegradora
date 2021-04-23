@@ -12,8 +12,8 @@ class StoreUser {
   get rules () {
     return {
       email: 'required|email|unique:users,email|max:254',
-      password: 'required|max:60',
-      username: 'required|unique:users,username|max:80'
+      password: 'required|string|max:60',
+      username: 'required|string|unique:users,username|max:80'
     }
   }
 
