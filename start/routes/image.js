@@ -46,3 +46,7 @@ Route.get('img/:fileName', 'RepoController.showImage')
 Route.post('video', 'RepoController.videoFeed')
   .prefix('v1/api/repo')
   .namespace('Image')
+
+Route.put('cam/ip', 'RepoController.updateCameraIp')
+  .prefix('v1/api/repo')
+  .namespace('Image')

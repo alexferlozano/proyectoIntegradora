@@ -12,13 +12,6 @@ const User = use('App/Models/User')
 
 class RepoController {
   async storeCamera ({ request, response }) {
-    /* const camera = await Camera.findBy('code', request.input('code'))
-    if(camera){
-      return response.internalServerError({
-        message: 'Camara ya creada!',
-        error: error
-      })
-    } */
     const camera = await Camera.findBy('code', request.input('code'))
     if (camera) {
       return response.unprocessableEntity({
@@ -36,6 +29,29 @@ class RepoController {
         status: 'Success',
         message: 'Camera created',
         data: cam
+      })
+    } catch (error) {
+      return response.internalServerError({
+        message: 'Something was wrong!',
+        error: error
+      })
+    }
+  }
+
+  async updateCameraIp ({ request, response }) {
+    const camera = await Camera.findBy('code', request.input('code'))
+    if (!camera) {
+      return response.notFound({
+        message: 'Camera not found'
+      })
+    }
+    try {
+      camera.merge({ip: request.input('ip')})
+      await camera.save()
+      return response.ok({
+        status: 'Success',
+        message: 'Camera IP field updated',
+        data: camera
       })
     } catch (error) {
       return response.internalServerError({
@@ -92,7 +108,7 @@ class RepoController {
         route: request.input('route'),
         obj_type: obj_type,
         distance: request.input('distance'),
-        date_photo: new Date(),
+        date_photo: request.input('date_photo')? request.input('date_photo') : new Date(),
       })
       await image.save()
       const user = await User.find(camera.user_id)
@@ -126,7 +142,7 @@ class RepoController {
       const value = await camera.values().create({
         temperature: request.input('temperature'),
         humidity: request.input('humidity'),
-        date_value: new Date(),
+        date_value: request.input('date_value')? request.input('date_value') : new Date(),
       })
       await value.save()
       const user = await User.find(camera.user_id)
@@ -158,6 +174,11 @@ class RepoController {
     }
     try {
       const user = await User.find(camera.user_id)
+      if(!user) {
+        return response.notFound({
+          message: 'User not found'
+        })
+      }
       const topic = Ws.getChannel('video:*').topic('video:'+user.username)
       console.log(topic)
       if (topic && user) {
